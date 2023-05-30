@@ -1,17 +1,14 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './pages/account/login/login.component';
+import { CommonModule } from '@angular/common';
+import { LoginPageModule } from './pages/account/login/login.module';
+import { LoginPageRoutingModule } from './pages/account/login/login-routing.module';
 
 const routes: Routes = [
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
+  
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule) },
+  { path: 'login', loadChildren: () => import('./pages/account/login/login.module').then(m => m.LoginPageModule) }
 ];
 
 @NgModule({

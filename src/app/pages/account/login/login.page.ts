@@ -4,17 +4,17 @@ import {
   LoadingController,
   NavController,
   ToastController,
-  ToastOptions,
 } from '@ionic/angular';
 import { UserModel } from 'src/app/models/user.model';
 import { DataService } from 'src/app/services/data.service';
+import { SecurityUtil } from '../../../utils/security';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  templateUrl: './login.page.html',
+  styleUrls: ['./login.page.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginPage implements OnInit {
   public hide = true;
   public form: FormGroup;
 
@@ -26,10 +26,10 @@ export class LoginComponent implements OnInit {
     private service: DataService
   ) {
     this.form = this.fb.group({
-      username: ['', Validators.compose([Validators.required])],
-      password: [
-        '',
-        Validators.compose([
+      username: ['', Validators.compose([
+        Validators.required
+      ])],
+      password: [  '', Validators.compose([
           Validators.minLength(6),
           Validators.maxLength(20),
           Validators.required,
@@ -50,11 +50,11 @@ export class LoginComponent implements OnInit {
 
     this.service.authenticate(this.form.value).subscribe(
       (data: any) => {
-        //SecurityUtil.set(data);
+        SecurityUtil.set(data);
         loading.dismiss();
         this.navCtrl.navigateRoot('/');
       },
-      (err) => {
+      (error: any) => {
         this.showError('Usuário ou Senha inválidos');
         loading.dismiss();
       }
@@ -80,10 +80,8 @@ export class LoginComponent implements OnInit {
   async showError(message: string) {
     const error = await this.toastCtrl.create({
       message: message,
-      buttons: [
-        { text:'Fechar', role: 'cancel'}
-      ], 
-      duration: 3000
+      buttons: [{ text: 'Fechar', role: 'cancel' }],
+      duration: 3000,
     });
     error.present();
   }
