@@ -1,0 +1,9 @@
+<div class="ion-padding">
+  <app-loading *ngIf="!user"></app-loading>
+</div>
+
+<p class="text-center" *ngIf="user">
+  <img src="{{ user.image }}" alt=" {{ user.name }}">
+  <small>{{ user.name }}</small><br>
+  <ion-button color="primary" size="small" (click)="logOut()">Sair</ion-button>
+</p>

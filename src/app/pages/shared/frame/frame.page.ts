@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-frame',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./frame.page.scss'],
 })
 export class FramePage implements OnInit {
+  constructor(
+    private menuCtrl: MenuController,
+    private navCrtl: NavController
+  ) {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  goToPage(page: string): void {
+    this.menuCtrl.close();
+    this.navCrtl.navigateRoot(page);
   }
-
 }

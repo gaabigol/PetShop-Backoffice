@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { LoadingComponent } from './loading/loading.component';
 import { IonicModule } from '@ionic/angular';
 import { MonthlySalesChartComponent } from './monthly-sales-chart/monthly-sales-chart.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { UserCardComponent } from './user-card/user-card.component';
 
 
 
@@ -10,6 +12,8 @@ import { MonthlySalesChartComponent } from './monthly-sales-chart/monthly-sales-
   declarations: [
     LoadingComponent, 
     MonthlySalesChartComponent,
+    NavbarComponent,
+    UserCardComponent,
   ],
   imports: [
     CommonModule, 
@@ -17,7 +21,9 @@ import { MonthlySalesChartComponent } from './monthly-sales-chart/monthly-sales-
   ],
   exports: [
     LoadingComponent,
-    MonthlySalesChartComponent
+    MonthlySalesChartComponent,
+    NavbarComponent,
+    UserCardComponent,
     
   ]
 })
