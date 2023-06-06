@@ -6,6 +6,7 @@ import { MonthlySalesChartComponent } from './monthly-sales-chart/monthly-sales-
 import { NavbarComponent } from './navbar/navbar.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { OrderListComponent } from './order-list/order-list.component';
+import { OrderStatusBagdeComponent } from './order-status-bagde/order-status-bagde.component';
 
 
 
@@ -16,6 +17,7 @@ import { OrderListComponent } from './order-list/order-list.component';
     NavbarComponent,
     UserCardComponent,
     OrderListComponent,
+    OrderStatusBagdeComponent,
   ],
   imports: [
     CommonModule, 
@@ -27,6 +29,7 @@ import { OrderListComponent } from './order-list/order-list.component';
     NavbarComponent,
     UserCardComponent,
     OrderListComponent,
+    OrderStatusBagdeComponent,
     
   ]
 })
