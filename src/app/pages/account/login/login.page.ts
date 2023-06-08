@@ -26,10 +26,10 @@ export class LoginPage implements OnInit {
     private service: DataService
   ) {
     this.form = this.fb.group({
-      username: ['', Validators.compose([
-        Validators.required
-      ])],
-      password: [  '', Validators.compose([
+      username: ['', Validators.compose([Validators.required])],
+      password: [
+        '',
+        Validators.compose([
           Validators.minLength(6),
           Validators.maxLength(20),
           Validators.required,
@@ -39,26 +39,42 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {}
-
+  
   async submit() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      return;
+    }
 
     const loading = await this.loadingCtrl.create({
       message: 'Autenticando...',
     });
-    loading.present();
 
-    this.service.authenticate(this.form.value).subscribe(
-      (data: any) => {
-        SecurityUtil.set(data);
-        loading.dismiss();
-        this.navCtrl.navigateRoot('/');
-      },
-      (error: any) => {
-        this.showError('Usuário ou Senha inválidos');
-        loading.dismiss();
-      }
-    );
+    try {
+      loading.present();
+
+      const authenticationData = this.form.value;
+      await this.authenticateUser(authenticationData);
+
+      SecurityUtil.set(authenticationData);
+      this.navCtrl.navigateRoot('/');
+    } catch (error) {
+      this.showError('Usuário ou Senha inválidos');
+    } finally {
+      loading.dismiss();
+    }
+  }
+
+  private authenticateUser(authenticationData: any): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.service.authenticate(authenticationData).subscribe(
+        () => {
+          resolve();
+        },
+        (error: any) => {
+          reject(error);
+        }
+      );
+    });
   }
 
   async resetPassword() {

@@ -8,11 +8,14 @@ const routes: Routes = [
   {
     path: '',
     component: FramePage,
-    //canActivate: [AuthorizedGuard],
+    canActivate: [AuthorizedGuard],
     children: [
       { path: '', loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule) },
       { path: 'orders', loadChildren: () => import('./pages/store/orders/orders.module').then(m => m.OrdersPageModule) },
-      { path: 'orders/:number', loadChildren: () => import('./pages/store/orders-details/orders-details.module').then(m => m.OrdersDetailsPageModule) }
+      {
+        path: 'orders/:number',
+        loadChildren: () => import('./pages/store/order-details/order-details.module').then( m => m.OrderDetailsPageModule)
+      }  
     ]
   },
 ];

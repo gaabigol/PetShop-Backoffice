@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Order } from 'src/app/models/order.model';
+import { OrderDetais } from 'src/app/models/orderdetails.model';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -25,6 +26,6 @@ export class OrderListComponent implements OnInit {
   }
 
   goToOrder(order: Order): void {
-    this.navCrtl.navigateRoot(`/orders/${order}`);
+    this.navCrtl.navigateRoot(`/orders/${order.number}`);
   }
 }

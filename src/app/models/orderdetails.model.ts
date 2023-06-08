@@ -1,10 +1,10 @@
 export class OrderDetais {
   public number: string;
-  public data: Date;
+  public date: Date;
   public status: string;
   public total: number;
   public discount: number;
-  public deliveryFree: number;
+  public deliveryFee: number;
   public customer: {
     name: string;
   };

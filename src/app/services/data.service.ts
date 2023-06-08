@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Order } from '../models/order.model';
 import { Observable } from 'rxjs';
+import { OrderDetais } from '../models/orderdetails.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class DataService {
     return this.http.get<Order[]>(`${this.url}/orders`);
   }
 
-  public getOrder(order: Order){
+  public getOrder(order: any): any{
     return this.http.get(`${this.url}/orders/${order}`);
   }
 }
